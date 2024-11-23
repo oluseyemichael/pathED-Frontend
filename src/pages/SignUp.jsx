@@ -40,7 +40,7 @@ function SignUp() {
           <img src="/src/assets/logo.svg" alt="Logo" className="h-8" />
         </div>
         <div className="max-w-xl w-full  p-8 rounded-lg">
-          <h1 className="font-aeonik-bold text-3xl lg:text-5xl font-medium text-left mb-4">Signup to start<span className="text-blue-600"> <span className='text-6xl font-sans'>.</span>learning</span></h1>
+          <h1 className="font-aeonik-bold text-2xl lg:text-5xl font-medium text-left mb-4">Signup to start<span className="text-blue-600"> <span className='text-6xl font-sans'>.</span>learning</span></h1>
           <h2 className="text-left text-gray-600 mb-5 mt-3 lg:mb-6 lg:mt-4 text-sm lg:text-base">Welcome to your self-aiding platform. <span className="text-gray-600 underline font-semibold">Sign up today!</span></h2>
 
           {/* Google Signup */}
@@ -77,7 +77,7 @@ function SignUp() {
                 name="username"
                 placeholder="Username"
                 onChange={handleChange}
-                className="w-full py-3 px-7 font-medium text-gray-900 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
+                className="w-full py-3 px-7 font-medium text-gray-900 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5 mb-3"
                 required
               />
               <input

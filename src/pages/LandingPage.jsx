@@ -1,15 +1,19 @@
 import React from 'react';
 import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
+import HeroAndContentSection from '../components/HeroAndContentSection';
 import FeaturesSection from '../components/FeaturesSection';
+import HowItWorksSection from '../components/HowItWorksSection';
+import CoursesOfferedSection from '../components/CoursesOfferedSection';
 import Footer from '../components/Footer';
 
 export default function LandingPage() {
   return (
     <div>
       <Header />
-      <HeroSection />
+      <HeroAndContentSection />
       <FeaturesSection />
+      <HowItWorksSection />
+      <CoursesOfferedSection />
       <Footer />
     </div>
   );
