@@ -1,4 +1,3 @@
-// src/pages/VerifyEmail.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../services/api';
@@ -18,10 +17,9 @@ function VerifyEmail() {
         const response = await api.get(`/verify-email/?uid=${uid}&token=${token}`);
         if (response.status === 200) {
           setStatus('success');
-          // Navigate to the EmailVerified page upon success
           setTimeout(() => {
             navigate('/email-verified');
-          }, 1500); // Delay for user experience
+          }, 1500);
         } else {
           setStatus('failure');
         }
@@ -34,10 +32,27 @@ function VerifyEmail() {
   }, [location.search, navigate]);
 
   return (
-    <div className="verify-email">
-      {status === 'success' && <p>Email successfully verified. Redirecting...</p>}
-      {status === 'failure' && <p>Verification failed. The link may have expired.</p>}
-      {!status && <p>Verifying your email...</p>}
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
+      <div className="p-8 w-full max-w-md">
+        <div className="flex justify-center mb-6">
+          <img src="/src/assets/logo.svg" alt="Logo" className="h-8" />
+        </div>
+        {status === 'success' && (
+          <div className="bg-green-100 text-green-800 px-4 py-3 rounded-md mb-6">
+            Email successfully verified. Redirecting...
+          </div>
+        )}
+        {status === 'failure' && (
+          <div className="bg-red-100 text-red-800 px-4 py-3 rounded-md mb-6">
+            Verification failed. The link may have expired.
+          </div>
+        )}
+        {!status && (
+          <div className="bg-blue-100 text-blue-800 px-4 py-3 rounded-md mb-6">
+            Verifying your email...
+          </div>
+        )}
+      </div>
     </div>
   );
 }

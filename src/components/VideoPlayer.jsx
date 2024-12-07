@@ -36,6 +36,7 @@ const VideoPlayer = ({ videoLink, moduleId, onVideoWatched }) => {
           // Save progress
           localStorage.setItem(`video_progress_${moduleId}`, currentTime);
 
+          //Change to 90% after testing
           if (percentage >= 1) {
             clearInterval(interval);
             onVideoWatched(moduleId);

@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api';
 import { FcGoogle } from 'react-icons/fc';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 function SignUp() {
   const [formData, setFormData] = useState({ username: '', email: '', password: '', full_name: '', confirm_password: '' });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,7 +25,7 @@ function SignUp() {
     try {
       const response = await registerUser(formData);
       if (response.status === 201) {
-        setSuccessMessage('Account created successfully! Check your email to verify your account.');
+        setSuccessMessage("Account created successfully! Check your email to verify your account. If you don't see the email, please check your spam folder.");
         setErrorMessage('');
       } else {
         setErrorMessage('Registration failed. Try again.');
@@ -89,24 +91,40 @@ function SignUp() {
                 className="w-full py-3 px-7 font-medium mb-3 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
                 required
               />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full py-3 px-7 font-medium mb-3 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
-                required
-              />
-              <input
-                type="password"
-                name="confirm_password"
-                placeholder="Confirm Password"
-                value={formData.confirm_password}
-                onChange={handleChange}
-                className="w-full py-3 px-7 font-medium mb-6 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
-                required
-              />
+              <div className='relative'>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full py-3 px-7 font-medium mb-3 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
+                  required
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-600 mb-3 lg:mb-5"
+                >
+                  {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+                </span>
+              </div>
+              <div className='relative'>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="confirm_password"
+                  placeholder="Confirm Password"
+                  value={formData.confirm_password}
+                  onChange={handleChange}
+                  className="w-full py-3 px-7 font-medium mb-6 border rounded-lg focus:outline-none focus:border-blue-500 lg:mb-5"
+                  required
+                />
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-600 mb-3 lg:mb-5"
+                >
+                  {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+                </span>
+              </div>
               <button
                 type="submit"
                 className="w-full py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:bg-blue-700 font-semibold text-base"

@@ -5,7 +5,7 @@ import Progress from '../components/Progress';
 import { Card, CardContent } from '../components/Card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '../components/Tabs';
 import VideoPlayer from "../components/VideoPlayer";
-import { ChevronLeft, ChevronRight, Clock, Video, FileText, Menu, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Clock, Video, FileText, Menu, X, Check } from 'lucide-react';
 
 const LearningPathDetail = () => {
   const { id } = useParams();
@@ -216,20 +216,20 @@ const LearningPathDetail = () => {
         const nextModuleName = learningPath.modules[currentModuleIndex + 1];
         const response = await fetchModuleDetail(nextModuleName); // Fetch details of the next module
         const nextModuleData = response.data;
-  
+
         // Update selected module content
         setSelectedModuleContent(nextModuleData);
-  
+
         // Update current module index
         setCurrentModuleIndex(currentModuleIndex + 1);
-  
+
         // Handle quiz data if available
         if (nextModuleData.quizzes) {
           setQuizData(nextModuleData.quizzes);
         } else {
           setQuizData(null);
         }
-  
+
         // Clear quiz-related states
         setQuizCompleted(false);
         setQuizMessage("");
@@ -239,26 +239,37 @@ const LearningPathDetail = () => {
       }
     } else {
       // Last module reached
-      const learningPathCompleted = learningPathProgress?.completed;
-      if (learningPathCompleted) {
-        try {
-          // Fetch the next learning path
-          const nextLearningPath = await fetchNextLearningPath(learningPath.id);
-          if (nextLearningPath) {
-            navigate(`/learning-path/${nextLearningPath.id}`);
-          } else {
-            console.log("No more learning paths available!");
-          }
-        } catch (error) {
-          console.error("Error fetching the next learning path:", error);
-        }
-      } else {
-        console.log("Complete the current learning path before proceeding.");
-      }
+      await handleNextLearningPath();
     }
   };
-  
-  
+
+  const handleNextLearningPath = async () => {
+    try {
+      const nextLearningPath = await fetchNextLearningPath(learningPath.id); // Fetch the next learning path
+      if (nextLearningPath) {
+        console.log("Next Learning Path:", nextLearningPath.id);
+
+        // Reset state before navigating to the new learning path
+        setSelectedModuleContent(null);
+        setCurrentModuleIndex(0);
+        setQuizData(null);
+        setQuizCompleted(false);
+        setQuizMessage("");
+        setUserAnswers({});
+        setModuleCompletionStatus({});
+        setVideoProgress({});
+
+        navigate(`/learning-path/${nextLearningPath.id}`); // Navigate to the next learning path
+      } else {
+        console.log("No more learning paths available!");
+        alert("No next learning path found.");
+      }
+    } catch (error) {
+      console.error("Error fetching the next learning path:", error);
+      alert("An error occurred while fetching the next learning path.");
+    }
+  };
+
 
   const handlePreviousModule = () => {
     // Navigate to the previous module
@@ -278,22 +289,22 @@ const LearningPathDetail = () => {
         console.error("No quiz data available.");
         return;
       }
-  
+
       const answers = Object.keys(userAnswers).map((questionId) => ({
         question_id: parseInt(questionId),
         answer_id: userAnswers[questionId],
       }));
-  
+
       console.log("Submitting answers:", answers);
-  
+
       // Call API to submit quiz answers
       const response = await updateQuizScore(quizId, answers);
       console.log("Quiz submission response:", response);
-  
+
       if (!response || response.completed === undefined) {
         throw new Error("Unexpected response structure from quiz submission.");
       }
-  
+
       const quizState = {
         completed: response.completed,
         score: response.score.toFixed(1),
@@ -301,18 +312,18 @@ const LearningPathDetail = () => {
           ? `You have passed the quiz! Your Score - ${response.score.toFixed(1)}%`
           : `You did not pass the quiz. Please try again. Your Score - ${response.score.toFixed(1)}%`,
       };
-  
+
       // Save quiz state in localStorage
       localStorage.setItem(`quiz_${quizId}`, JSON.stringify(quizState));
-  
+
       // Update UI
       setQuizCompleted(quizState.completed);
       setQuizMessage(quizState.message);
-  
+
       if (quizState.completed) {
         console.log("Updating module progress...");
         await updateModuleProgress(selectedModuleContent.id, { quiz_completed: true });
-  
+
         // Check if the module is complete
         const moduleResponse = await fetchModuleProgress(selectedModuleContent.id);
         if (moduleResponse?.data?.completed) {
@@ -323,7 +334,7 @@ const LearningPathDetail = () => {
           }));
           localStorage.setItem(`module_completion_${selectedModuleContent.id}`, "true");
         }
-  
+
         // Refresh learning path progress
         await fetchProgressData();
       }
@@ -332,7 +343,7 @@ const LearningPathDetail = () => {
       setQuizMessage("An error occurred while submitting the quiz. Please try again.");
     }
   };
-  
+
 
 
   useEffect(() => {
@@ -350,7 +361,7 @@ const LearningPathDetail = () => {
       setQuizMessage("");
     }
   }, [selectedModuleContent]);
-  
+
 
 
 
@@ -371,6 +382,17 @@ const LearningPathDetail = () => {
     return moduleCompletionStatus[moduleName] || false; // Default to false if not found
   };
 
+  // Function to check if all modules in the learning path are completed
+  const isPathCompleted = () => {
+    if (!learningPath || !learningPath.modules) {
+      return false;
+    }
+    return learningPath.modules.every((moduleName) =>
+      moduleCompletionStatus[moduleName]
+    );
+  };
+
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -388,11 +410,21 @@ const LearningPathDetail = () => {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              setSelectedModuleContent(null); // Reset selected module
+              setCurrentModuleIndex(0); // Reset the module index
+              setQuizData(null); // Clear quiz data
+              setQuizCompleted(false); // Reset quiz state
+              setQuizMessage(""); // Clear quiz message
+              setUserAnswers({}); // Clear quiz answers
+              setModuleCompletionStatus({}); // Reset module completion status
+              setVideoProgress({}); // Reset video progress
+              navigate(-1); // Navigate back
+            }}
             className="flex items-center text-gray-600 hover:text-gray-900 lg:mr-4"
           >
             <ChevronLeft className="w-5 h-5 mr-1" />
-            Back to Course
+            Back
           </button>
 
           <div className="ml-auto flex items-center space-x-4">
@@ -445,19 +477,30 @@ const LearningPathDetail = () => {
                     key={index}
                     onClick={() => handleModuleClick(moduleName, index)}
                     className={`cursor-pointer transition-all ${currentModuleIndex === index
-                      ? 'border-blue-500 bg-blue-50'
-                      : 'hover:border-gray-300'
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'hover:border-gray-300'
                       }`}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-center space-x-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${currentModuleIndex === index
-                          ? 'bg-blue-500 text-white'
-                          : 'bg-gray-100 text-gray-500'
-                          }`}>
-                          {index + 1}
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${isModuleCompleted(moduleName)
+                              ? 'bg-blue-500 text-white'
+                              : 'bg-gray-100 text-gray-400'
+                            }`}
+                        >
+                          {isModuleCompleted(moduleName) ? (
+                            <Check className="w-5 h-5" />
+                          ) : (
+                            <span>{index + 1}</span>
+                          )}
                         </div>
-                        <span className="font-medium">{moduleName}</span>
+                        <span
+                          className={`font-medium ${isModuleCompleted(moduleName) ? 'text-blue-600' : 'text-gray-800'
+                            }`}
+                        >
+                          {moduleName}
+                        </span>
                       </div>
                     </CardContent>
                   </Card>
@@ -613,16 +656,29 @@ const LearningPathDetail = () => {
                     <span>Previous Module</span>
                   </button>
                 )}
-                {currentModuleIndex < learningPath.modules.length - 1 && (
+                {currentModuleIndex < learningPath.modules.length - 1 ? (
                   <button
                     onClick={handleNextModule}
                     disabled={!isModuleCompleted(selectedModuleContent?.module_name)}
                     className={`font-medium px-6 py-3 rounded-lg flex items-center space-x-2 transition-all ${isModuleCompleted(selectedModuleContent?.module_name)
-                        ? 'bg-blue-500 hover:bg-blue-600 text-white'
-                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       }`}
                   >
                     <span>Next Module</span>
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                ) : (
+                  // Show "Next Learning Path" button only if it's the last module in the path
+                  <button
+                    onClick={handleNextLearningPath}
+                    disabled={!isPathCompleted()}
+                    className={`font-medium px-6 py-3 rounded-lg flex items-center space-x-2 transition-all ${isPathCompleted()
+                      ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      }`}
+                  >
+                    <span>Next Learning Path</span>
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 )}

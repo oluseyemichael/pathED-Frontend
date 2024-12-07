@@ -286,7 +286,8 @@ const CourseDetails = () => {
           </Card>
 
           <div className="space-y-4 sm:space-y-6 animate-slideUp delay-200">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#001249]">Learning Paths</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#001249]">Learning Paths:</h2>
+            <h4 className="text-sm lg:text-lg md:text-lg font-semibold text-[#001249]">Click on a path to proceed</h4>
             <div className="grid gap-6 sm:gap-8">
               {course.learning_paths?.map((path, index) => (
                 <Card 

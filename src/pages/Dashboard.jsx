@@ -67,10 +67,19 @@ const Dashboard = () => {
         const progressPromises = coursesResponse.data.map(async (course) => {
           try {
             const progressResponse = await fetchCourseProgress(course.id);
-            return { courseId: course.id, progress: progressResponse.data.progress_percentage || 0 };
+            return {
+              courseId: course.id,
+              progress: progressResponse.data?.progress_percentage ?? 0
+            };
           } catch (error) {
-            console.error(`Error fetching progress for course ${course.id}`, error);
-            return { courseId: course.id, progress: 0 }; // Default to 0 if error occurs
+            // More specific logging and handling
+            if (error.response && error.response.status === 404) {
+              console.log(`No progress found for course ${course.id}`);
+              return { courseId: course.id, progress: 0 };
+            } else {
+              console.error(`Unexpected error fetching progress for course ${course.id}`, error);
+              return { courseId: course.id, progress: 0 };
+            }
           }
         });
 
@@ -113,7 +122,7 @@ const Dashboard = () => {
         {/* Welcome Header */}
         <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 to-blue-400 p-8 text-white shadow-lg">
           <div className="relative z-10">
-            <h1 className="text-3xl font-bold">Welcome back, {user?.username}! 👋</h1>
+            <h1 className="text-3xl font-bold">Welcome, {user?.username}! 👋</h1>
             <p className="mt-2 text-blue-100">Here's Your Learning Progress And Available Courses.</p>
           </div>
           <div className="absolute top-0 right-0 w-64 h-64 transform translate-x-1/3 -translate-y-1/3">
