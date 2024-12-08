@@ -37,7 +37,7 @@ const VideoPlayer = ({ videoLink, moduleId, onVideoWatched }) => {
           localStorage.setItem(`video_progress_${moduleId}`, currentTime);
 
           //Change to 90% after testing
-          if (percentage >= 1) {
+          if (percentage >= 90) {
             clearInterval(interval);
             onVideoWatched(moduleId);
           }
@@ -63,6 +63,14 @@ const VideoPlayer = ({ videoLink, moduleId, onVideoWatched }) => {
     } else {
       initializePlayer();
     }
+
+    // Cleanup function to remove the player when the component unmounts
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.destroy();
+        playerRef.current = null;
+      }
+    };
   }, [videoLink, moduleId, onVideoWatched]);
 
   const getYouTubeVideoId = (url) => {
