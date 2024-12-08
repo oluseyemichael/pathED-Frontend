@@ -50,7 +50,7 @@ const Badge = ({ className = "", children }) => (
 
 const Logo = () => (
   <div className="flex items-center space-x-2">
-    <img src="/src/assets/logo.svg" alt="PathED" className="h-8 mr-2" />
+    <img src="/assets/logo.svg" alt="PathED" className="h-8 mr-2" />
     {/* <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="32" height="32" rx="8" fill="#4C78FF"/>
       <path d="M8 16L16 8L24 16L16 24L8 16Z" fill="white"/>

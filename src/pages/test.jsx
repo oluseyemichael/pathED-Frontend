@@ -35,7 +35,7 @@ function VerifyEmail() {
     <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
       <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
         <div className="flex justify-center mb-6">
-          <img src="/src/assets/logo.svg" alt="Logo" className="h-8" />
+          <img src="/assets/logo.svg" alt="Logo" className="h-8" />
         </div>
         {status === 'success' && (
           <div className="bg-green-100 text-green-800 px-4 py-3 rounded-md mb-6">

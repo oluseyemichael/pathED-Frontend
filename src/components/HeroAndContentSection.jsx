@@ -14,9 +14,9 @@ const StartLearningSection = () => {
 
   return (
     <div className='flex flex-row space-x-2'>
-      <div className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 border rounded-xl w-fit flex flex-row space-x-2 cursor-pointer' onClick={handleStartLearning}>
+      <div className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-5 border rounded-xl w-fit flex flex-row space-x-2 cursor-pointer' onClick={handleStartLearning}>
         <h1>Start Learning</h1>
-        <GoArrowUpRight className='w-5 h-5' />
+        <GoArrowUpRight className='mt-1' />
       </div>
       <h1 className='text-blue-600 hover:text-blue-700 underline font-semibold text-lg py-4 px-6 cursor-pointer'>Learn more</h1>
     </div>
@@ -28,7 +28,7 @@ const HeroAndContentSection = () => {
     <div>
       {/* Hero Section */}
       <section id='about' className="mt-16" >
-        <div className="container px-6 mb--20 bg-[url('/src/assets/Rectangle-bg.png')]">
+        <div className="container px-6 mb--20 bg-[url('/assets/Rectangle-bg.png')]">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center">
             <div className="text-left mt-16 mb-16">
               <div className='flex flex-row text-sm text-blue-600 font-medium border rounded-xl w-fit px-2 py-1 space-x-3 mb-6 shadow-md'>
@@ -45,7 +45,7 @@ const HeroAndContentSection = () => {
               <StartLearningSection />
             </div>
             <div className="hidden md:block">
-              <img src="src/assets/hero-image.png" alt="Hero Image" className="w-full" />
+              <img src="/assets/hero-image.png" alt="Hero Image" className="w-full" />
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ const HeroAndContentSection = () => {
             </h2>
           </div>
           <div className="md:block">
-            <img src="src/assets/illustration1.png" alt="Bottom" className="absolute right-0 w-24 md:w-32" />
+            <img src="/assets/illustration1.png" alt="Bottom" className="absolute right-0 w-24 md:w-32" />
           </div>
         </div>
       </section>

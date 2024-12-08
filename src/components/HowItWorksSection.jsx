@@ -64,7 +64,7 @@ const HowItWorksSection = () => {
         <Card>
           <div className="flex items-center space-x-4 mb-4">
             <div className="font-bold rounded-lg">
-            <img src="src/assets/tag01.png" alt="01" />
+            <img src="/assets/tag01.png" alt="01" />
             </div>
             <CardTitle>Choose a proficiency level</CardTitle>
           </div>
@@ -89,21 +89,21 @@ const HowItWorksSection = () => {
         <Card>
           <div className="flex items-center space-x-4 mb-4">
           <div className="font-bold rounded-lg w-10 h-10 flex items-center justify-center">
-            <img src="src/assets/tag02.png" alt="02" />
+            <img src="/assets/tag02.png" alt="02" />
             </div>
             <CardTitle>Watch curated video lessons</CardTitle>
           </div>
           <CardContent>
             <p className="text-gray-500">Learn through top-quality video lessons, carefully curated to keep you focused and inspired, while offering practical, real-world insights.</p>
             <div className="mt-4">
-              <img src="/api/placeholder/640/360" alt="Lesson preview" className="w-full rounded-lg" />
+              <img src="/assets/lessonpreview.png" alt="Lesson preview" className="h-20 w-80 rounded-lg float-right" />
             </div>
           </CardContent>
         </Card>
         <Card>
           <div className="flex space-x-4 mb-4">
           <div className="font-bold rounded-lg w-10 h-10 flex items-center justify-center">
-            <img src="src/assets/tag03.png" alt="03" />
+            <img src="/assets/tag03.png" alt="03" />
             </div>
             <CardTitle>Take interactive quizzes</CardTitle>
           </div>
@@ -133,7 +133,7 @@ const HowItWorksSection = () => {
         <Card>
           <div className="flex items-center space-x-4 mb-4">
           <div className="font-bold rounded-lg w-10 h-10 flex items-center justify-center">
-            <img src="src/assets/tag04.png" alt="04" />
+            <img src="/assets/tag04.png" alt="04" />
             </div>
             <CardTitle>Learn valuable skills</CardTitle>
           </div>
@@ -141,13 +141,13 @@ const HowItWorksSection = () => {
             <p className="text-gray-500">Dive deeper with each lesson, building essential skills that translate into real-life applications and lasting knowledge.</p>
             <div className="mt-4 grid grid-cols-3 gap-4">
               <div className="rounded-lg shadow-lg flex items-center justify-center">
-                <img src="/src/assets/figma_logo.svg" alt="Figma icon" className="w-5 h-5" />
+                <img src="/assets/figma_logo.svg" alt="Figma icon" className="w-5 h-5" />
               </div>
               <div className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center">
-                <img src="/src/assets/js.svg" alt="JavaScript icon" className="w-5 h-5" />
+                <img src="/assets/js.svg" alt="JavaScript icon" className="w-5 h-5" />
               </div>
               <div className="shadow-lg flex items-center justify-center">
-                <img src="/src/assets/framer.png" alt="Framer icon" className="w-5 h-5" />
+                <img src="/assets/framer.png" alt="Framer icon" className="w-5 h-5" />
               </div>
             </div>
           </CardContent>

@@ -68,7 +68,7 @@ const Sidebar = () => {
         {/* Logo Area */}
         <div className="flex items-center h-16 px-6 border-b border-gray-800">
           <div className="w-full h-8">
-            <img src="src/assets/logo.svg" alt="PathED" />
+            <img src="/assets/logo.svg" alt="PathED" />
           </div>
         </div>
 

@@ -43,10 +43,10 @@ const Login = () => {
     <div className="flex justify-center items-center min-h-screen p-4 font-sans">
       <div>
         <div className="justify-start lg:mt-10 ">
-          <img src="/src/assets/logo.svg" alt="Logo" className="h-8" />
+          <img src="/assets/logo.svg" alt="Logo" className="h-8" />
         </div>
         <div className="max-w-xl w-full p-8 rounded-lg">
-          <h1 className="font-aeonik-bold text-2xl lg:text-4xl font-medium text-left mb-4 justify-start">
+          <h1 className="font-aeonik text-2xl lg:text-4xl font-medium text-left mb-4 justify-start">
             Login to continue<span className="text-blue-600"> <span className='text-6xl font-sans'>.</span>learning</span>
           </h1>
           <h2 className="text-left text-gray-600 mb-5 mt-3 lg:mb-6 lg:mt-4 text-sm lg:text-base">

@@ -453,7 +453,7 @@ const LearningPathDetail = () => {
           }`}>
           <div className="p-6 flex items-center justify-between">
             <div className="flex items-center">
-              <img src="/src/assets/logo.svg" alt="Logo" className="h-8 mr-2" />
+              <img src="/assets/logo.svg" alt="Logo" className="h-8 mr-2" />
             </div>
             <button
               className="lg:hidden"

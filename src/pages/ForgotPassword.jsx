@@ -1,4 +1,3 @@
-// src/pages/ForgotPassword.jsx
 import React, { useState } from 'react';
 import { requestPasswordReset } from '../services/api';
 

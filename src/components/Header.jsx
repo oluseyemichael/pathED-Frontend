@@ -23,7 +23,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center">
-              <img src="src/assets/logo.svg" alt="pathED" className="h-8" />
+              <img src="/assets/logo.svg" alt="pathED" className="h-8" />
             </div>
             
             {/* Desktop Menu - Hidden on medium and small screens */}
