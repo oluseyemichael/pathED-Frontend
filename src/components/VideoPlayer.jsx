@@ -9,6 +9,11 @@ const VideoPlayer = ({ videoLink, moduleId, onVideoWatched }) => {
 
       playerRef.current = new window.YT.Player(`youtube-player-${moduleId}`, {
         videoId,
+        playerVars: {
+          autoplay: 0, // Ensure manual start
+          controls: 1, // Show playback controls
+          modestbranding: 1, // Reduce branding
+        },
         events: {
           onReady: handlePlayerReady,
           onStateChange: handlePlayerStateChange,
