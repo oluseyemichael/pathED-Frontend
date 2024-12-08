@@ -44,7 +44,7 @@ const HeroAndContentSection = () => {
               </p>
               <StartLearningSection />
             </div>
-            <div className="hidden md:block">
+            <div className="hidden md:block md:-mt-20 lg:mt-9">
               <img src="/assets/hero-image.png" alt="Hero Image" className="w-full" />
             </div>
           </div>
@@ -52,7 +52,7 @@ const HeroAndContentSection = () => {
       </section>
 
       {/* Content Section */}
-      <section className="bg-blue-600 text-white py-16">
+      <section className="bg-blue-600 text-white py-16 px-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-left">
             <h2 className="text-2xl font-medium font-aeonik mb-4">

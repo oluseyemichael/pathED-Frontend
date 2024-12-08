@@ -16,7 +16,9 @@ const SignupSection = () => {
     <div className='text-center mb-14'>
       <div className='bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 border rounded-xl w-fit flex flex-row space-x-2 cursor-pointer text-center mx-auto' onClick={handleSignup}>
         <h1>Signup</h1>
-        <GoArrowUpRight className='w-5 h-5' />
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform -rotate-45" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+        </svg>
       </div>
     </div>
   );
@@ -44,7 +46,7 @@ const CardContent = ({ children }) => (
 
 const HowItWorksSection = () => {
   return (
-    <div id="how-it-works" className='bg-gray-100 pt-16 mb-16'>
+    <div id="how-it-works" className=' pt-16 mb-16'>
       <div className='text-center mb-14'>
         <CardHeader>
         <div className='flex flex-row text-sm text-blue-600 font-medium border rounded-xl w-fit px-2 py-1 space-x-3 mb-6 shadow-md text-center mx-auto'>
@@ -71,15 +73,15 @@ const HowItWorksSection = () => {
           <CardContent>
             <p className="text-gray-500">Select a tailored path that matches your goals, whether it's a new skill, a deeper understanding, or preparing for a career shift.</p>
             <div className="mt-4 space-y-2">
-              <div className="flex items-center space-x-2">
-                <span className="text-blue-500 font-bold">★★★</span>
+              <div className=" rounded-lg shadow-lg flex items-center justify-between px-2 py-1">
+                <span className="text-blue-500 font-bold">★★★</span> 
                 <span className="font-medium">Advanced</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className=" rounded-lg shadow-lg flex items-center justify-between px-3 py-1">
                 <span className="text-blue-500 font-bold">★★</span>
                 <span className="font-medium">Intermediate</span>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className=" rounded-lg shadow-lg flex items-center justify-between px-4 py-1">
                 <span className="text-blue-500 font-bold">★</span>
                 <span className="font-medium">Beginner</span>
               </div>
@@ -139,14 +141,14 @@ const HowItWorksSection = () => {
           </div>
           <CardContent>
             <p className="text-gray-500">Dive deeper with each lesson, building essential skills that translate into real-life applications and lasting knowledge.</p>
-            <div className="mt-4 grid grid-cols-3 gap-4">
-              <div className="rounded-lg shadow-lg flex items-center justify-center">
+            <div className="mt-6">
+              <div className="p-4 rounded-lg shadow-lg flex items-center justify-center">
                 <img src="/assets/figma_logo.svg" alt="Figma icon" className="w-5 h-5" />
               </div>
-              <div className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-center">
+              <div className="p-4 rounded-lg shadow-lg flex items-center justify-center">
                 <img src="/assets/js.svg" alt="JavaScript icon" className="w-5 h-5" />
               </div>
-              <div className="shadow-lg flex items-center justify-center">
+              <div className="p-4 shadow-lg flex items-center justify-center">
                 <img src="/assets/framer.png" alt="Framer icon" className="w-5 h-5" />
               </div>
             </div>
